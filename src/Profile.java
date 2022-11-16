@@ -53,6 +53,7 @@ public class Profile extends JFrame {
 	private String name;
 	private ImageIcon profile_img;
 	private ImageIcon background_img;
+	private JLabel lblNewLabel_4;
 	
 	
 		
@@ -128,7 +129,7 @@ public class Profile extends JFrame {
 		 * } else{ this.backGroundImg = background_img; }
 		 */
 		lblNewLabel_3 = new JLabel();
-		lblNewLabel_3.setBounds(107, 350, 57, 49);
+		lblNewLabel_3.setBounds(107, 340, 57, 49);
 		lblNewLabel_3.setIcon(changeImageSize(userProfileInProfile.p_img,57,49));
 		panel.add(lblNewLabel_3);
 		
@@ -136,6 +137,13 @@ public class Profile extends JFrame {
 		lblNewLabel_1.setBackground(new Color(188, 212, 232));
 		lblNewLabel_1.setBounds(0, 0, 273, 557);
 		panel.add(lblNewLabel_1);
+		
+		lblNewLabel_4 = new JLabel(userProfileInProfile.getName());
+		lblNewLabel_4.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNewLabel_4.setForeground(new Color(255, 255, 255));
+		lblNewLabel_4.setFont(new Font("¸¼Àº °íµñ", Font.PLAIN, 17));
+		lblNewLabel_4.setBounds(95, 400, 74, 28);
+		panel.add(lblNewLabel_4);
 	}
 	
 	
@@ -194,6 +202,7 @@ public class Profile extends JFrame {
 				Image new_img_1 = ori_img_1.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 				ImageIcon new_icon_1 = new ImageIcon(new_img_1);
 		        lblNewLabel_1.setIcon(userProfileInProfile.b_Img);
+		        lblNewLabel_4.setText(userProfileInProfile.getName());
 		        lblNewLabel_3.setIcon(new_icon_1);
 			}
 		}

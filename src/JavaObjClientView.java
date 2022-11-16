@@ -72,15 +72,17 @@ public class JavaObjClientView extends JFrame {
 	public User_profile user_profile;
 	public User_profile user_profile_update;
 	public User_profile user_profile_update_others;
+	public User_profile user_profile_to_send_list;
 	
 
 	/**
 	 * Create the frame.
 	 */
-	public JavaObjClientView(String username, String ip_addr, String port_no, User_profile a) {
+	public JavaObjClientView(String username, String ip_addr, String port_no, User_profile a, User_profile b) {
 		user_profile = new User_profile(" ");
 		user_profile = a;
-		
+		user_profile_to_send_list = new User_profile(" ");
+		user_profile_to_send_list = b;
 
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(800, 200, 394, 630);
@@ -240,10 +242,6 @@ public class JavaObjClientView extends JFrame {
 					User_profile up;//프로필
 					try {
 						obcm = ois.readObject();
-						if(obcm instanceof User_profile) {
-							User_profile x = (User_profile)obcm;
-							System.out.println(x.getCode()+"$$$$$$$$$$$$$$$$$$$");
-						}
 					} catch (ClassNotFoundException e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -269,12 +267,9 @@ public class JavaObjClientView extends JFrame {
 						System.out.println(up.getCode()+"8***************");
 						switch (up.getCode()) {
 						case "700": // 상시 내꺼의 프로필 버전 업데이트
-							user_profile_update = up;
-							break;
-						case "800": // 상대꺼를 받아옴
 							user_profile_update_others = up;
-							System.out.println(user_profile_update_others.getName());
-							System.out.println("8***************");
+							user_profile_to_send_list = user_profile_update_others;
+							break;
 						}
 						
 					}

@@ -1,4 +1,6 @@
 import java.io.Serializable;
+import java.util.Vector;
+
 import javax.swing.ImageIcon;
 import java.awt.Image;
 
@@ -14,6 +16,7 @@ public class User_profile implements Serializable {
 	public ImageIcon b_Img;
 	public String passWord;
 	private String code;
+	private String update;
 	
 	
 	public User_profile(String id) {

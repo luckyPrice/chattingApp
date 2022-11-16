@@ -4,17 +4,20 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-
 import java.awt.Color;
 import javax.swing.JLabel;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.Vector;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.Icon;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
+import javax.swing.JTextPane;
 
 public class FriendListPage extends JFrame {
 
@@ -23,13 +26,19 @@ public class FriendListPage extends JFrame {
 	private JavaObjClientView JavaObjClientView;
 	private JButton profileButton;
 	private JButton chatButton;
+	private JButton btnNewButton;
+	private JLabel lblNewLabel_1;
 	private JLabel nameOnFirstPage;
+	private User_profile userProfileInFreidList_toList;
+	private JTextPane textPane;
+	private String[] name;
 	
 	public FriendListPage(String username, String ip_addr, String port_no, User_profile a) {
 		setVisible(true);
 		userProfileInFreidList = new User_profile("");
 		userProfileInFreidList = a;
 		userProfileInFreidList.setName(username);
+		userProfileInFreidList_toList = new User_profile("");
 		ImageIcon profile1 = new ImageIcon("src/profile.jpg");
 		ImageIcon profile_icon = new ImageIcon("src/profile.png");
 		ImageIcon chat = new ImageIcon("src/chat.png");
@@ -84,6 +93,7 @@ public class FriendListPage extends JFrame {
 		
 		
 		nameOnFirstPage = new JLabel(userProfileInFreidList.getName());
+		nameOnFirstPage.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
 		nameOnFirstPage.setBounds(165, 86, 57, 15);
 		contentPane.add(nameOnFirstPage);
 		
@@ -92,9 +102,31 @@ public class FriendListPage extends JFrame {
 		panel_1.setBorder(null);
 		panel_1.setBounds(66, 151, 406, 1);
 		contentPane.add(panel_1);
-		JavaObjClientView = new JavaObjClientView(username, ip_addr, port_no, userProfileInFreidList);//일단 안보이게
+		
+		lblNewLabel_1 = new JLabel(userProfileInFreidList.getMessage());
+		lblNewLabel_1.setFont(new Font("맑은 고딕", Font.PLAIN, 15));
+		lblNewLabel_1.setBounds(271, 86, 189, 15);
+		contentPane.add(lblNewLabel_1);
+		
+		ImageIcon edit = new ImageIcon("src/Refresh.png");
+		btnNewButton = new JButton(changeImageSize(edit, 31, 23));
+		btnNewButton.setBackground(new Color(255, 0, 0, 0));
+		btnNewButton.setBounds(429, 10, 31, 23);
+		contentPane.add(btnNewButton);
+		
+		JScrollPane scrollPane = new JScrollPane();
+		scrollPane.setBounds(479, 151, -412, 429);
+		contentPane.add(scrollPane);
+		
+		textPane = new JTextPane();
+		textPane.setBounds(66, 151, 406, 419);
+		contentPane.add(textPane);
+		
+		refreshAction action2 = new refreshAction();
+		btnNewButton.addActionListener(action2);
+		
+		JavaObjClientView = new JavaObjClientView(username, ip_addr, port_no, userProfileInFreidList, userProfileInFreidList_toList);//일단 안보이게
 		JavaObjClientView.setVisible(false);
-		System.out.println(JavaObjClientView);
 		
 	}
 	
@@ -109,10 +141,48 @@ public class FriendListPage extends JFrame {
 		}
 	}
 	
+	class refreshAction implements ActionListener {//프로필 사진 변경
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			// 액션 이벤트가 sendBtn일때 또는 textField 에세 Enter key 치면
+			if (e.getSource() == btnNewButton){
+				profileButton.setIcon(changeImageSize(userProfileInFreidList.p_img, 63, 56));//프로필 바뀜
+				nameOnFirstPage.setText(userProfileInFreidList.getName());
+				lblNewLabel_1.setText(userProfileInFreidList.getMessage());
+				
+			}
+		}
+	}
 	public ImageIcon changeImageSize(ImageIcon image, int x, int y) {
 		Image pic1 = image.getImage();
 		Image pic2 = pic1.getScaledInstance(x, y, java.awt.Image.SCALE_SMOOTH);
 		ImageIcon pic3 = new ImageIcon(pic2);
 		return pic3;
+	}
+	
+	public void AppendIcon(ImageIcon icon) {
+		int len = textPane.getDocument().getLength();
+		textPane.setCaretPosition(len); // place caret at the end (with no selection)
+		textPane.insertIcon(icon);	
+	}
+	
+
+	// 화면에 출력
+	public void AppendText(String msg) {
+		// textArea.append(msg + "\n");
+		if (userProfileInFreidList_toList == null) {
+			AppendIcon(changeImageSize(userProfileInFreidList.getP_img(), 30, 30));
+		}
+		else {
+			AppendIcon(changeImageSize(userProfileInFreidList_toList.getP_img(), 30, 30));
+		}
+		msg = msg.trim(); // 앞뒤 blank와 \n을 제거한다.
+		int len = textPane.getDocument().getLength();
+		// 끝으로 이동
+		textPane.setCaretPosition(len);
+		textPane.replaceSelection(msg + "\n"+"\n");
+	}
+	
+	public void ShowFreindProfile(String s){;
 	}
 }
