@@ -1,8 +1,6 @@
 [chattingApp.pdf](https://github.com/user-attachments/files/17015199/chattingApp.pdf)
 ![image](https://github.com/user-attachments/assets/5c01275b-7e99-4cd5-be8d-030702c90681)
 ![image](https://github.com/user-attachments/assets/0928e45d-d133-43a2-9abc-cb65f0a76e33)
-![image](https://github.com/user-attachments/assets/cf48e615-1678-426a-a530-e5d78c46d9b5)
-![image](https://github.com/user-attachments/assets/a2d5a920-1a85-47cb-82e9-fda19da50e8a)
 
 시연 화면
 ![chattting mp4 mp4_20240917_002646](https://github.com/user-attachments/assets/9e7b86f0-4c80-4b07-a581-7c44892f1564)
